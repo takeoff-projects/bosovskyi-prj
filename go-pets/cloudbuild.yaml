@@ -15,7 +15,7 @@ steps:
 
 substitutions:
   _SERVICE_FOLDER: .
-  _SERVICE_NAME: cats
+  _SERVICE_NAME: go-pets
 
 images:
   - "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"
