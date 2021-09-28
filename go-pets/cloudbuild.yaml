@@ -1,0 +1,19 @@
+steps:
+  - id: "build image"
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "gcr.io/${GOOGLE_CLOUD_PROJECT}/${_SERVICE_NAME}",
+      ]
+
+  - id: "push image"
+    name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/${GOOGLE_CLOUD_PROJECT}/${_SERVICE_NAME}"]
+
+substitutions:
+  _SERVICE_NAME: cats
+
+images:
+  - "gcr.io/${GOOGLE_CLOUD_PROJECT}/${_SERVICE_NAME}"
