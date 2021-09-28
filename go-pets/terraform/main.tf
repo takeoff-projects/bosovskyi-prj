@@ -12,7 +12,7 @@ provider "google" {
 }
 
 locals {
-  location = "us_central"
+  location = "nam5"
   
   service_name   = "go-pets"
 
