@@ -55,7 +55,7 @@ resource "google_app_engine_application" "app" {
 # Set permissions
 resource "google_project_iam_binding" "service_permissions" {
   for_each = toset([
-    "run.invoker", "datastore.owner"
+    "run.invoker", "datastore.owner","appengine.appCreator"
   ])
   
   role       = "roles/${each.key}"
