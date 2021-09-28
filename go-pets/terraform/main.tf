@@ -52,7 +52,7 @@ resource "google_project_iam_binding" "service_permissions" {
 }
 
 # The Cloud Run service
-resource "google_cloud_run_service" "go_pets" {
+resource "google_cloud_run_service" "default" {
   name                       = local.service_name
   location                   = var.region
   autogenerate_revision_name = true
@@ -84,9 +84,9 @@ data "google_iam_policy" "noauth" {
 }
 
 resource "google_cloud_run_service_iam_policy" "noauth" {
-  location = google_cloud_run_service.go_pets.location
-  project  = google_cloud_run_service.go_pets.project
-  service  = google_cloud_run_service.go_pets.name
+  location = google_cloud_run_service.default.location
+  project  = google_cloud_run_service.default.project
+  service  = google_cloud_run_service.default.name
 
   policy_data = data.google_iam_policy.noauth.policy_data
   depends_on  = [google_cloud_run_service.go_pets]
