@@ -46,12 +46,6 @@ resource "google_service_account" "pets_worker" {
   display_name = "Pets Worker SA"
 }
 
-resource "google_app_engine_application" "app" {
-  project     = var.project
-  location_id = local.location
-  database_type = "CLOUD_DATASTORE_COMPATIBILITY"
-}
-
 # Set permissions
 resource "google_project_iam_binding" "service_permissions" {
   for_each = toset([
@@ -140,6 +134,4 @@ resource "google_datastore_index" "default" {
         name = "petname"
         direction = "ASCENDING"
   }
-  
-  depends_on = [google_app_engine_application.app]
 }
