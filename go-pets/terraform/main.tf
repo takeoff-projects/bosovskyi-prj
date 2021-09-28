@@ -40,10 +40,21 @@ resource "google_project_service" "datastore" {
   disable_on_destroy = false
 }
 
+resource "google_app_engine_application" "app" {
+  project     = var.project
+  location_id = local.location
+  database_type = "CLOUD_DATASTORE_COMPATIBILITY"
+}
+
 # Create a service account
 resource "google_service_account" "pets_worker" {
   account_id   = "pets-worker"
   display_name = "Pets Worker SA"
+}
+
+resource "google_service_account_key" "pets_worker_key" {
+  service_account_id = google_service_account.pets_worker.name
+  public_key_type    = "TYPE_X509_PEM_FILE"
 }
 
 # Set permissions
@@ -134,4 +145,6 @@ resource "google_datastore_index" "default" {
         name = "petname"
         direction = "ASCENDING"
   }
+  
+  depends_on = [google_app_engine_application.app]
 }
