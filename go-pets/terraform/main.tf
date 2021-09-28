@@ -54,7 +54,11 @@ resource "google_app_engine_application" "app" {
 
 # Set permissions
 resource "google_project_iam_binding" "service_permissions" {
-  role       = "roles/run.invoker"
+  for_each = toset([
+    "run.invoker", "datastore.owner"
+  ])
+  
+  role       = "roles/${each.key}"
   members    = [local.pets_worker_sa]
   depends_on = [google_service_account.pets_worker]
 }
@@ -136,4 +140,6 @@ resource "google_datastore_index" "default" {
         name = "petname"
         direction = "ASCENDING"
   }
+  
+  depends_on = [google_app_engine_application.app]
 }
