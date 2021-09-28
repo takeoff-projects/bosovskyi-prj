@@ -12,6 +12,8 @@ provider "google" {
 }
 
 locals {
+  location = "us_central"
+  
   service_name   = "go-pets"
 
   deployment_name = "go-pets"
@@ -46,8 +48,10 @@ resource "google_service_account" "pets_worker" {
 
 resource "google_app_engine_application" "app" {
   project     = var.project
-  location_id = var.region
+  location_id = local.location
   database_type = "CLOUD_DATASTORE_COMPATIBILITY"
+  
+  disable_on_destroy = false
 }
 
 # Set permissions
