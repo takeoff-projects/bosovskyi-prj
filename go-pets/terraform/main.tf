@@ -50,8 +50,6 @@ resource "google_app_engine_application" "app" {
   project     = var.project
   location_id = local.location
   database_type = "CLOUD_DATASTORE_COMPATIBILITY"
-  
-  disable_on_destroy = false
 }
 
 # Set permissions
