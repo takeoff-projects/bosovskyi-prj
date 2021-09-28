@@ -108,35 +108,3 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
 data "external" "image_digest" {
   program = ["bash", "../scripts/get_latest_tag.sh", var.project, local.service_name]
 }
-
-resource "google_datastore_index" "default" {
-  kind = "Pet"
-  properties {
-    name = "added"
-    direction = "ASCENDING"
-  }
-  properties {
-    name = "caption"
-    direction = "ASCENDING"
-  }
-  properties {
-      name = "email"
-      direction = "ASCENDING"
-  }
-  properties {
-      name = "image"
-      direction = "ASCENDING"
-  }
-  properties {
-      name = "likes"
-      direction = "ASCENDING"
-  }
-  properties {
-      name = "owner"
-      direction = "ASCENDING"
-  }
-  properties {
-        name = "petname"
-        direction = "ASCENDING"
-  }
-}

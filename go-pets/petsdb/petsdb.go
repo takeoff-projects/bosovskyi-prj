@@ -1,7 +1,6 @@
 package petsdb
 
 import (
-	
 	"context"
 	"fmt"
 	"log"
@@ -22,7 +21,7 @@ type Pet struct {
 	Likes   int       `datastore:"likes"`
 	Owner   string    `datastore:"owner"`
 	Petname string    `datastore:"petname"`
-	Name    string     // The ID used in the datastore.
+	Name    string    // The ID used in the datastore.
 }
 
 // GetPets Returns all pets from datastore ordered by likes in Desc Order
@@ -41,7 +40,7 @@ func GetPets() ([]Pet, error) {
 	}
 
 	// Create a query to fetch all Pet entities".
-	query := datastore.NewQuery("Pet").Order("-likes")
+	query := datastore.NewQuery("Pet")
 	keys, err := client.GetAll(ctx, query, &pets)
 	if err != nil {
 		fmt.Println(err)
