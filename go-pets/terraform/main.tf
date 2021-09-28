@@ -46,7 +46,7 @@ resource "google_service_account" "pets_worker" {
 
 # Set permissions
 resource "google_project_iam_binding" "service_permissions" {
-  role       = "run.invoker"
+  role       = "roles/run.invoker"
   members    = [local.pets_worker_sa]
   depends_on = [google_service_account.pets_worker]
 }
