@@ -17,7 +17,7 @@ locals {
   deployment_name = "go-api"
   api_worker_sa  = "serviceAccount:${google_service_account.api_worker.email}"
   
-  cloud_run_url = google_cloud_run_service.cloud-run.status[0].url
+  cloud_run_url = google_cloud_run_service.api.status[0].url
 }
 
 resource "google_project_service" "run" {
