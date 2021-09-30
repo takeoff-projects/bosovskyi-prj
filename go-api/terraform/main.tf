@@ -114,7 +114,7 @@ resource "google_endpoints_service" "openapi_service" {
     produces:
       - application/json
     x-google-backend:
-      address: https://roi-takeoff-user75.us-central1.r.appspot.com
+      address: "${local.cloud_run_url}"
       protocol: h2
     paths:
       /api/messages:
